@@ -1,5 +1,6 @@
 import { getAllRepartidores } from "@/lib/data";
-import { CircleX } from "lucide-react";
+import { CircleX, Eye } from "lucide-react";
+import Link from "next/link";
 
 async function ListaRepartidores() {
     const repartidores = await getAllRepartidores();
@@ -24,7 +25,12 @@ async function ListaRepartidores() {
               <td className="border px-4 py-2">{repartidor.nombre}</td>
               <td className="border px-4 py-2">{repartidor.telefono}</td>
               <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
-                ACCIONES
+              <Link
+                  className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                  href={`/repartidores/${repartidor.id}`}
+                >
+                  <Eye />
+                </Link>
               </td>
             </tr>
           ))}

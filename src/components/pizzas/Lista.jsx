@@ -1,8 +1,9 @@
 import { getAllPizzas } from "@/lib/data";
-import { CircleX } from "lucide-react";
+import { CircleX, Eye } from "lucide-react";
+import Link from "next/link";
 
 async function ListaPizzas() {
-    const pizzas = await getAllPizzas();
+  const pizzas = await getAllPizzas();
   return (
     <>
       <h1 className="text-3xl font-bold mt-10">LISTA DE PIZZAS</h1>
@@ -24,7 +25,12 @@ async function ListaPizzas() {
               <td className="border px-4 py-2">{pizza.nombre}</td>
               <td className="border px-4 py-2">{pizza.precio}</td>
               <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
-                ACCIONES
+                <Link
+                  className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                  href={`/pizzas/${pizza.id}`}
+                >
+                  <Eye />
+                </Link>
               </td>
             </tr>
           ))}
