@@ -1,15 +1,22 @@
 import { getAllRepartidores } from "@/lib/data";
-import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
+import { CircleX, Eye, Pen, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import RepartidorEliminar from "./Eliminar";
 import RepartidorModificar from "./Modificar";
 import Modal from "../modal";
+import RepartidorInsertar from "./Insertar";
 
 async function ListaRepartidores() {
     const repartidores = await getAllRepartidores();
   return (
     <>
       <h1 className="text-3xl font-bold mt-10">LISTA DE REPARTIDORES</h1>
+
+      <Modal openElement={
+                <h1 className="flex gap-4 px-4 py-2 bg-green-500 my-5 text-white rounded hover:bg-green-700">AGREGAR REPARTIDOR NUEVO <Plus /></h1>
+                }>
+                 <RepartidorInsertar />  
+              </Modal>
 
       <table className="table-auto w-full mt-5 border-collapse border shadow-lg">
         <thead>

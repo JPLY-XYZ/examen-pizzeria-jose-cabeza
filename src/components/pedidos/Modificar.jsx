@@ -1,6 +1,6 @@
 import { modificarPedido } from "@/lib/actions";
 
-function PedidoModificar({pedido}) {
+function PedidoModificar({pedido,repartidores}) {
     return ( <form
         action={modificarPedido} 
         className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
@@ -35,6 +35,22 @@ function PedidoModificar({pedido}) {
           placeholder="Direccion del cliente"
           title="La direccion del cliente"
         />
+        <label className="flex items-center gap-2">
+          <span>Repartidor:</span>
+          <select
+            required
+            className="border p-2 rounded w-full text-black"
+            name="repartidorId"
+            defaultValue={pedido.repartidorId}
+          >
+            <option value="">Seleccione un repartidor</option>
+            {repartidores.map((repartidor) => (
+              <option key={repartidor.id} value={repartidor.id}>
+                {repartidor.nombre}
+              </option>
+            ))}
+          </select>
+        </label>
        
        
         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">

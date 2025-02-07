@@ -1,16 +1,28 @@
-import { getAllPedidos } from "@/lib/data";
-import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
+import { getAllPedidos, getAllRepartidores } from "@/lib/data";
+import { CircleX, Eye, Pen, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import PedidoEliminar from "./Eliminar";
 import PedidoModificar from "./Modificar";
 import Modal from "../modal";
+import PedidoInsertar from "./Insertar";
 
 async function ListaPedidos() {
   const pedidos = await getAllPedidos();
+  const repartidores = await getAllRepartidores();
 
   return (
     <>
       <h1 className="text-3xl font-bold mt-10">LISTA DE PEDIDOS</h1>
+
+      <Modal
+        openElement={
+          <h1 className="flex gap-4 my-5 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
+            AGREGAR PEDIDO NUEVO <Plus />
+          </h1>
+        }
+      >
+        <PedidoInsertar repartidores={repartidores} />
+      </Modal>
 
       <table className="table-auto w-full mt-5 border-collapse border shadow-lg">
         <thead>
@@ -39,15 +51,32 @@ async function ListaPedidos() {
                 {pedido.pizzas.map((pizza) => pizza.nombre).join(", ")}
               </td>
               <td className="border px-4 py-2 text-center flex flex-col items-center gap-3">
-              <Link
+                <Link
                   className="flex gap-4  px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
                   href={`/pedidos/${pedido.id}`}
                 >
                   <Eye />
                 </Link>
-                <Modal openElement={<button className="flex gap-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"> <Trash2 /></button>}><PedidoEliminar id={pedido.id} /></Modal>
-                <Modal openElement={<button className="flex gap-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700"> <Pen /></button>}><PedidoModificar pedido={pedido} /></Modal>
-
+                <Modal
+                  openElement={
+                    <button className="flex gap-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
+                      {" "}
+                      <Trash2 />
+                    </button>
+                  }
+                >
+                  <PedidoEliminar id={pedido.id} />
+                </Modal>
+                <Modal
+                  openElement={
+                    <button className="flex gap-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700">
+                      {" "}
+                      <Pen />
+                    </button>
+                  }
+                >
+                  <PedidoModificar repartidores={repartidores} pedido={pedido} />
+                </Modal>
               </td>
             </tr>
           ))}

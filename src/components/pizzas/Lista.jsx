@@ -1,15 +1,22 @@
 import { getAllPizzas } from "@/lib/data";
-import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
+import { CircleX, Eye, Pen, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import PizzaEliminar from "./Eliminar";
 import PizzaModificar from "./Modificar";
 import Modal from "../modal";
+import PizzaInsertar from "./Insertar";
 
 async function ListaPizzas() {
   const pizzas = await getAllPizzas();
   return (
     <>
       <h1 className="text-3xl font-bold mt-10">LISTA DE PIZZAS</h1>
+
+      <Modal openElement={
+                <h1 className="flex gap-4 px-4 py-2 bg-green-500 my-5 text-white rounded hover:bg-green-700">AGREGAR PIZZA NUEVO <Plus /></h1>
+                }>
+                <PizzaInsertar />   
+              </Modal>
 
       <table className="table-auto w-full mt-5 border-collapse border shadow-lg">
         <thead>
