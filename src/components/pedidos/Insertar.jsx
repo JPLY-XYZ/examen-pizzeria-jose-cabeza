@@ -1,6 +1,6 @@
 import { insertarPedido } from "@/lib/actions";
 
-function PedidoInsertar({repartidores}) {
+function PedidoInsertar({repartidores, pizzas}) {
   return (
     <form
       action={insertarPedido}
@@ -47,6 +47,20 @@ function PedidoInsertar({repartidores}) {
           ))}
         </select>
       </label>
+      <fieldset className="flex flex-wrap gap-2">
+          <legend className="sr-only">Pizzas</legend>
+          {pizzas.map((pizza) => (
+            <label key={pizza.id} className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name={`pizza${pizza.id}`}
+                value={pizza.id}
+                className="border p-2 rounded text-black"
+              />
+              <span>{pizza.nombre}</span>
+            </label>
+          ))}
+        </fieldset>
 
       <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
         Insertar

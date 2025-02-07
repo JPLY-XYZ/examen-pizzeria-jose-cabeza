@@ -1,6 +1,6 @@
 import { modificarPedido } from "@/lib/actions";
 
-function PedidoModificar({pedido,repartidores}) {
+function PedidoModificar({pedido,repartidores,pizzas}) {
     return ( <form
         action={modificarPedido} 
         className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
@@ -51,6 +51,21 @@ function PedidoModificar({pedido,repartidores}) {
             ))}
           </select>
         </label>
+        <fieldset className="flex flex-wrap gap-2">
+          <legend className="sr-only">Pizzas</legend>
+          {pizzas.map((pizza) => (
+            <label key={pizza.id} className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name={`pizza${pizza.id}`}
+                value={pizza.id}
+                defaultChecked={pedido.pizzas.some((p) => p.id === pizza.id)}
+                className="border p-2 rounded text-black"
+              />
+              <span>{pizza.nombre}</span>
+            </label>
+          ))}
+        </fieldset>
        
        
         <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">

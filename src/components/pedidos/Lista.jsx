@@ -1,4 +1,4 @@
-import { getAllPedidos, getAllRepartidores } from "@/lib/data";
+import { getAllPedidos, getAllPizzas, getAllRepartidores } from "@/lib/data";
 import { CircleX, Eye, Pen, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import PedidoEliminar from "./Eliminar";
@@ -9,6 +9,7 @@ import PedidoInsertar from "./Insertar";
 async function ListaPedidos() {
   const pedidos = await getAllPedidos();
   const repartidores = await getAllRepartidores();
+  const pizzas = await getAllPizzas();
 
   return (
     <>
@@ -21,7 +22,7 @@ async function ListaPedidos() {
           </h1>
         }
       >
-        <PedidoInsertar repartidores={repartidores} />
+        <PedidoInsertar pizzas={pizzas} repartidores={repartidores} />
       </Modal>
 
       <table className="table-auto w-full mt-5 border-collapse border shadow-lg">
@@ -75,7 +76,7 @@ async function ListaPedidos() {
                     </button>
                   }
                 >
-                  <PedidoModificar repartidores={repartidores} pedido={pedido} />
+                  <PedidoModificar pizzas={pizzas} repartidores={repartidores} pedido={pedido} />
                 </Modal>
               </td>
             </tr>

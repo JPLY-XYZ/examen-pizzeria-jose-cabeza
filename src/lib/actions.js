@@ -36,25 +36,41 @@ async function eliminarRepartidor(formData) {
 // PEDIDO
 
 async function insertarPedido(formData) {
+
+    const pizzasID = await prisma.pizza.findMany( {select: { id: true }} )
+    const connect = pizzasID.filter(e => formData.get(`pizza${e.id}`) !== null)
+
     await prisma.pedido.create({
         data: {
             fechaHora: new Date(formData.get('fechaHora')),
             nombreCliente: formData.get('nombreCliente'),
             direccionCliente: formData.get('direccionCliente'),
-            repartidorId: formData.get('repartidorId') ? +formData.get('repartidorId') : null
+            repartidorId: formData.get('repartidorId') ? +formData.get('repartidorId') : null,
+            pizzas: { connect }
         }
     });
     revalidatePath('/pedidos');
 }
 
 async function modificarPedido(formData) {
+
+    const pizzasID = await prisma.pizza.findMany( {select: { id: true }} )
+
+    const connect = pizzasID.filter(e => formData.get(`pizza${e.id}`) !== null)
+    const disconnect = pizzasID.filter(e => formData.get(`pizza${e.id}`) === null)
+
+
     await prisma.pedido.update({
         where: { id: +formData.get('id') },
         data: {
             fechaHora: new Date(formData.get('fechaHora')),
             nombreCliente: formData.get('nombreCliente'),
             direccionCliente: formData.get('direccionCliente'),
-            repartidorId: formData.get('repartidorId') ? +formData.get('repartidorId') : null
+            repartidorId: formData.get('repartidorId') ? +formData.get('repartidorId') : null,
+            pizzas: { 
+                connect,
+                disconnect
+             }
         }
     });
     revalidatePath('/pedidos');
