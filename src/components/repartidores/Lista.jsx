@@ -1,8 +1,9 @@
 import { getAllRepartidores } from "@/lib/data";
-import { CircleX, Eye } from "lucide-react";
+import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import RepartidorEliminar from "./Eliminar";
 import RepartidorModificar from "./Modificar";
+import Modal from "../modal";
 
 async function ListaRepartidores() {
     const repartidores = await getAllRepartidores();
@@ -33,8 +34,9 @@ async function ListaRepartidores() {
                 >
                   <Eye />
                 </Link>
-                <RepartidorEliminar id={repartidor.id} />
-                <RepartidorModificar repartidor={repartidor} />
+                <Modal openElement={<button className="flex gap-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"> <Trash2 /></button>}><RepartidorEliminar id={repartidor.id} /></Modal>
+                <Modal openElement={<button className="flex gap-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700"> <Pen /></button>}><RepartidorModificar repartidor={repartidor} /></Modal>
+                
               </td>
             </tr>
           ))}

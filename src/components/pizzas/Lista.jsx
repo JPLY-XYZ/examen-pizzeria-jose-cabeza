@@ -1,8 +1,9 @@
 import { getAllPizzas } from "@/lib/data";
-import { CircleX, Eye } from "lucide-react";
+import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import PizzaEliminar from "./Eliminar";
 import PizzaModificar from "./Modificar";
+import Modal from "../modal";
 
 async function ListaPizzas() {
   const pizzas = await getAllPizzas();
@@ -33,8 +34,10 @@ async function ListaPizzas() {
                 >
                   <Eye />
                 </Link>
-                <PizzaEliminar id={pizza.id} />
-                <PizzaModificar pizza={pizza} />
+                <Modal openElement={<button className="flex gap-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"> <Trash2 /></button>}><PizzaEliminar id={pizza.id} /></Modal>
+                <Modal openElement={<button className="flex gap-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700"> <Pen /></button>}><PizzaModificar pizza={pizza} /></Modal>
+
+                
               </td>
             </tr>
           ))}

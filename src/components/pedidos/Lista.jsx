@@ -1,8 +1,9 @@
 import { getAllPedidos } from "@/lib/data";
-import { CircleX, Eye } from "lucide-react";
+import { CircleX, Eye, Pen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import PedidoEliminar from "./Eliminar";
 import PedidoModificar from "./Modificar";
+import Modal from "../modal";
 
 async function ListaPedidos() {
   const pedidos = await getAllPedidos();
@@ -44,8 +45,9 @@ async function ListaPedidos() {
                 >
                   <Eye />
                 </Link>
-                <PedidoEliminar id={pedido.id} />
-                <PedidoModificar pedido={pedido} />
+                <Modal openElement={<button className="flex gap-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"> <Trash2 /></button>}><PedidoEliminar id={pedido.id} /></Modal>
+                <Modal openElement={<button className="flex gap-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-700"> <Pen /></button>}><PedidoModificar pedido={pedido} /></Modal>
+
               </td>
             </tr>
           ))}
