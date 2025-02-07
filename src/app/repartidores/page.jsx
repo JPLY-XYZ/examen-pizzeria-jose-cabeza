@@ -1,3 +1,4 @@
+import RepartidorInsertar from "@/components/repartidores/Insertar";
 import ListaRepartidores from "@/components/repartidores/Lista";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -13,6 +14,9 @@ function Repartidores() {
         >
           <Home /> <b>IR AL INICIO</b>
         </Link>
+
+        <RepartidorInsertar />
+
         <Suspense
           fallback={
             <div className="skeleton h-60 mt-10 w-full text-center">

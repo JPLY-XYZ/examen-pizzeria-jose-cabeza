@@ -23,6 +23,8 @@ async function PaginaRepartidor({ params }) {
       >
         <ItemRepartidor id={id} />
       </Suspense>
+
+      
     </div>
   );
 }

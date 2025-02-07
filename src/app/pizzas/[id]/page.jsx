@@ -1,6 +1,5 @@
-
 import ItemPizza from "@/components/pizzas/Item";
-import { Undo2 } from "lucide-react";
+import { Pizza, Undo2 } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 

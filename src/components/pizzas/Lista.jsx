@@ -1,6 +1,8 @@
 import { getAllPizzas } from "@/lib/data";
 import { CircleX, Eye } from "lucide-react";
 import Link from "next/link";
+import PizzaEliminar from "./Eliminar";
+import PizzaModificar from "./Modificar";
 
 async function ListaPizzas() {
   const pizzas = await getAllPizzas();
@@ -31,6 +33,8 @@ async function ListaPizzas() {
                 >
                   <Eye />
                 </Link>
+                <PizzaEliminar id={pizza.id} />
+                <PizzaModificar pizza={pizza} />
               </td>
             </tr>
           ))}

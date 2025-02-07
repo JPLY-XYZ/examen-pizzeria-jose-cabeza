@@ -1,6 +1,8 @@
 import { getAllRepartidores } from "@/lib/data";
 import { CircleX, Eye } from "lucide-react";
 import Link from "next/link";
+import RepartidorEliminar from "./Eliminar";
+import RepartidorModificar from "./Modificar";
 
 async function ListaRepartidores() {
     const repartidores = await getAllRepartidores();
@@ -31,6 +33,8 @@ async function ListaRepartidores() {
                 >
                   <Eye />
                 </Link>
+                <RepartidorEliminar id={repartidor.id} />
+                <RepartidorModificar repartidor={repartidor} />
               </td>
             </tr>
           ))}

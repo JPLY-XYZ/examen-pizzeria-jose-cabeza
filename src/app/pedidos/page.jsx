@@ -1,9 +1,13 @@
+import PedidoInsertar from "@/components/pedidos/Insertar";
 import ListaPedidos from "@/components/pedidos/Lista";
+import { getAllPizzas, getAllRepartidores } from "@/lib/data";
 import { Home } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
-function Pedidos() {
+async function Pedidos() {
+
+    
   return (
     <>
       <div className="flex flex-col items-center justify-center mt-5">
@@ -13,6 +17,8 @@ function Pedidos() {
         >
           <Home /> <b>IR AL INICIO</b>
         </Link>
+
+        <PedidoInsertar />
         <Suspense
           fallback={
             <div className="skeleton h-60 mt-10 w-full text-center">

@@ -1,3 +1,4 @@
+import PizzaInsertar from "@/components/pizzas/Insertar";
 import ListaPizzas from "@/components/pizzas/Lista";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -13,6 +14,9 @@ function Pizzas() {
         >
           <Home /> <b>IR AL INICIO</b>
         </Link>
+
+        <PizzaInsertar />
+        
         <Suspense
           fallback={
             <div className="skeleton h-60 mt-10 w-full text-center">

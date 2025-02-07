@@ -1,6 +1,8 @@
 import { getAllPedidos } from "@/lib/data";
 import { CircleX, Eye } from "lucide-react";
 import Link from "next/link";
+import PedidoEliminar from "./Eliminar";
+import PedidoModificar from "./Modificar";
 
 async function ListaPedidos() {
   const pedidos = await getAllPedidos();
@@ -42,6 +44,8 @@ async function ListaPedidos() {
                 >
                   <Eye />
                 </Link>
+                <PedidoEliminar id={pedido.id} />
+                <PedidoModificar pedido={pedido} />
               </td>
             </tr>
           ))}
