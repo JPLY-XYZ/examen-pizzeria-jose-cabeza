@@ -5,7 +5,7 @@ import prisma from "./prisma";
 
 // REPARTIDOR
 
-async function insertarRepartidor(formData) {
+async function insertarRepartidor(prevState,formData) {
     await prisma.repartidor.create({
         data: {
             nombre: formData.get('nombre'),
@@ -13,9 +13,10 @@ async function insertarRepartidor(formData) {
         }
     });
     revalidatePath('/repartidores');
+    return { success: 'El repartidor se inserto Correctamente' }
 }
 
-async function modificarRepartidor(formData) {
+async function modificarRepartidor(prevState,formData) {
     await prisma.repartidor.update({
         where: { id: +formData.get('id') },
         data: {
@@ -24,18 +25,19 @@ async function modificarRepartidor(formData) {
         }
     });
     revalidatePath('/repartidores');
+    return { success: 'El repartidor se modifico Correctamente' }
 }
 
-async function eliminarRepartidor(formData) {
+async function eliminarRepartidor(prevState,formData) {
     await prisma.repartidor.delete({
         where: { id: +formData.get('id') }
     });
-    revalidatePath('/repartidores');
+    return { success: 'El repartidor se elimino Correctamente' }
 }
 
 // PEDIDO
 
-async function insertarPedido(formData) {
+async function insertarPedido(prevState,formData) {
 
     const pizzasID = await prisma.pizza.findMany( {select: { id: true }} )
     const connect = pizzasID.filter(e => formData.get(`pizza${e.id}`) !== null)
@@ -50,9 +52,10 @@ async function insertarPedido(formData) {
         }
     });
     revalidatePath('/pedidos');
+    return { success: 'El pedido se inserto Correctamente' }
 }
 
-async function modificarPedido(formData) {
+async function modificarPedido(prevState,formData) {
 
     const pizzasID = await prisma.pizza.findMany( {select: { id: true }} )
 
@@ -74,18 +77,19 @@ async function modificarPedido(formData) {
         }
     });
     revalidatePath('/pedidos');
+    return { success: 'El pedido se modifico Correctamente' }
 }
 
-async function eliminarPedido(formData) {
+async function eliminarPedido(prevState,formData) {
     await prisma.pedido.delete({
         where: { id: +formData.get('id') }
     });
-    revalidatePath('/pedidos');
+    return { success: 'El pedido se elimino Correctamente' }
 }
 
 // PIZZA
 
-async function insertarPizza(formData) {
+async function insertarPizza(prevState,formData) {
     await prisma.pizza.create({
         data: {
             nombre: formData.get('nombre'),
@@ -93,9 +97,10 @@ async function insertarPizza(formData) {
         }
     });
     revalidatePath('/pizzas');
+    return { success: 'La pizza se inserto Correctamente' }
 }
 
-async function modificarPizza(formData) {
+async function modificarPizza(prevState,formData) {
     await prisma.pizza.update({
         where: { id: +formData.get('id') },
         data: {
@@ -104,13 +109,14 @@ async function modificarPizza(formData) {
         }
     });
     revalidatePath('/pizzas');
+    return { success: 'La pizza se modifico Correctamente' }
 }
 
-async function eliminarPizza(formData) {
+async function eliminarPizza(prevState,formData) {
     await prisma.pizza.delete({
         where: { id: +formData.get('id') }
     });
-    revalidatePath('/pizzas');
+    return { success: 'La pizza se elimino Correctamente' }
 }
 
 export {

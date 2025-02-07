@@ -1,9 +1,24 @@
+'use client'
 import { insertarRepartidor } from "@/lib/actions";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function RepartidorInsertar() {
+
+  const formId = useId();
+
+  const [state, action, pending] = useActionState(insertarRepartidor, {});
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId).closest('dialog')?.close() 
+    }
+  }, [state]);
+
   return (
     <form
-      action={insertarRepartidor}
+      action={action} id={formId}
       className="flex flex-col items-center justify-center mt-5 gap-3 p-5 border rounded shadow-lg"
     >
       <fieldset>AÑADIR NUEVO REPARTIDOR</fieldset>
